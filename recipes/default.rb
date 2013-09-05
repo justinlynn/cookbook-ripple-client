@@ -1,0 +1,1 @@
+include_recipe 'ripple-client::environment'
