@@ -1,0 +1,13 @@
+server {
+  listen  80;
+  server_name <%= @server_name %>;
+
+  # Security, we don't want to let others know exactly what version
+  # we're running without making them do a bunch of work first
+  server_tokens off;
+
+  # access_log /var/log/nginx/ripple-client.http.access.log;
+  # error_log /var/log/nginx/ripple-client.http.error.log;
+
+  rewrite ^(.*)$ https://$host:<%= @endpoint_port %>$1 permanent;
+}

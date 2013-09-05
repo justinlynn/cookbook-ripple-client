@@ -1,0 +1,28 @@
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+  network:
+  - ["forwarded_port", {guest: 443, host: 4343}]
+
+platforms:
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+  run_list:
+  - recipe[apt]
+# The following is used to test the cookbook's test environment setup cookbook. We use kitchen verify.
+  - recipe[minitest-handler]
+
+suites:
+- name: ripple-client
+  run_list:
+  - recipe[ripple-client]
+  - recipe[ripple-client-test] # set up test environment for verification
+  attributes:
+    ripple:
+      client:
+        app_server:
+          ssl:
+            endpoint_port: 4343
+    

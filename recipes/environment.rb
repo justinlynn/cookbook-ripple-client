@@ -1,0 +1,6 @@
+include_recipe 'ripple-client::firewall'
+include_recipe 'ripple-client::users'
+include_recipe 'ripple-client::paths'
+include_recipe 'ripple-client::app_server'
+include_recipe 'ripple-client::app_configuration'
+include_recipe 'ripple-client::app_source'
